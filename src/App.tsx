@@ -1,5 +1,4 @@
-import React from 'react'
-import { AppHeader, NavBar, SplashScreen } from './components'
+import { AppHeader, NavBar } from './components'
 import { Dashboard } from './screens/dashboard'
 import './styles/app.scss'
 
