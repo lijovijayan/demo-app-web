@@ -1,0 +1,21 @@
+.dashboard {
+    .ant-tabs {
+        .ant-tabs-nav-list {
+            .tab-title {
+                min-width: 100px;
+                @apply flex flex-row items-center justify-center px-2;
+                & > :first-child {
+                    @apply mr-2;
+                }
+            }
+        }
+    }
+    .ant-table-wrapper {
+        .ant-table-tbody {
+            height: calc(100vh - 400px);
+            max-height: calc(100vh - 400px);
+            overflow: auto;
+        }
+    }
+    @apply p-3 bg-secondary-light;
+}

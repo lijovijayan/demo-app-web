@@ -1,0 +1,39 @@
+@import '../theme.scss';
+.app-navbar {
+    box-shadow: -2px 1px 4px 0px #090909;
+    z-index: 3;
+    ol {
+        @apply list-none h-screen flex flex-col;
+        li {
+            cursor: not-allowed;
+            &.app-icon {
+                cursor: pointer;
+                @apply bg-primary-dark;
+                @apply text-secondary-thin;
+            }
+            &.active {
+                cursor: pointer;
+                &::before {
+                    content: '';
+                    width: 4px;
+                    height: 60%;
+                    border-top-right-radius: 3px;
+                    border-bottom-right-radius: 3px;
+                    @apply bg-primary absolute left-0;
+                }
+                @apply text-primary relative flex justify-start items-center;
+            }
+            &:last-child {
+                @apply mt-auto;
+            }
+            @apply p-5 text-primary-transparent;
+        }
+        .divider {
+            width: 40%;
+            height: 2px;
+            border-radius: 2px;
+            opacity: 0.1;
+            @apply bg-secondary-light self-center my-2;
+        }
+    }
+}

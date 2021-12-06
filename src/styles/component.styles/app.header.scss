@@ -1,0 +1,16 @@
+@import '../theme.scss';
+.app-header {
+    &::after {
+        background-color: #f0f0f0;
+        content: '';
+        height: 1px;
+        @apply absolute bottom-0 left-0 w-full;
+    }
+    .ant-page-header {
+        @apply w-full;
+        .app-breadcrumb {
+            @apply font-normal hidden lg:flex;
+        }
+    }
+    @apply bg-secondary-light hidden sm:flex relative;
+}

@@ -1,0 +1,11 @@
+@import '../theme.scss';
+.animation-wrapper {
+    .content-wrapper {
+        opacity: 0;
+        transition: all;
+        &.slide-into-view {
+            opacity: 1;
+            transform: translateY(0) !important;
+        }
+    }
+}

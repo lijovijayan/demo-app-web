@@ -1,0 +1,71 @@
+@import './theme.scss';
+html {
+    @apply overflow-x-hidden;
+}
+body {
+    font-family: 'Open Sans';
+    // font-family: 'Lato';
+    .app-container {
+        transition: opacity 1s ease-in;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+            'navbar app-content'
+            'navbar app-content';
+        .navbar {
+            display: none;
+            @apply bg-secondary;
+        }
+        .app-content {
+            grid-area: app-content;
+            .screen-content {
+                @apply flex-1 overflow-hidden;
+            }
+            @apply flex flex-col;
+        }
+        @media only screen and (min-width: 640px) {
+            .navbar {
+                display: flex;
+                grid-area: navbar;
+            }
+        }
+        @apply h-screen w-full overflow-hidden grid;
+    }
+    @apply h-screen w-full text-white bg-secondary-thin overflow-x-hidden;
+}
+* {
+    scroll-behavior: smooth;
+    // overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    @apply bg-secondary-thin;
+}
+
+/* background of the scrollbar except button or resizer */
+::-webkit-scrollbar-track {
+    @apply bg-secondary-thin;
+    &:hover {
+        @apply bg-secondary-thin;
+    }
+}
+
+/* scrollbar itself */
+::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    border: 3px solid red;
+    @apply bg-secondary-thin;
+}
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-secondary-thin;
+}
+
+/* set button(top and bottom of the scrollbar) */
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+::selection {
+    transition: background-color 0.35s;
+}

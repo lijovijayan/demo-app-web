@@ -1,0 +1,32 @@
+@import '../theme.scss';
+.splash-screen {
+    @keyframes ripple {
+        from {
+            transform: scale(0);
+            opacity: 1;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 0;
+        }
+    }
+    @apply h-screen w-full absolute flex items-center justify-center;
+    top: 0;
+    left: 0;
+    z-index: 9999999999;
+    .multi-ripple {
+        @apply w-24 h-24;
+        div {
+            @apply w-24 h-24 absolute opacity-0 p-4;
+            border-radius: 50%;
+            border: 0.3rem solid $primary;
+            animation: 1.5s ripple infinite;
+
+            &:nth-child(2) {
+                @apply flex items-center justify-center;
+                animation-delay: 0.5s;
+            }
+        }
+    }
+}
