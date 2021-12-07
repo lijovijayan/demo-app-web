@@ -1,17 +1,17 @@
 import { Table } from 'antd'
 import { useEffect, useState } from 'react'
-import { StudentService } from '../../../services'
+import { CollegeService } from '../../../services'
 import {
-    IFStudent,
     IPaginatedResponse,
     IPagination,
-    IStudent
+    ICollege,
+    IFCollege
 } from '../../../types'
-import columns from './table-columns'
+import renderColumns from './table-columns'
 
-export function Overview() {
+export function Colleges() {
     const [loading, setLoader] = useState(false)
-    const [students, setStudents] = useState<IStudent[]>([])
+    const [students, setStudents] = useState<ICollege[]>([])
     const [pagination, setPagination] = useState<IPagination>({
         page: 1,
         pageSize: 10,
@@ -23,14 +23,14 @@ export function Overview() {
         fetchStudents({ pagination })
     }, [])
 
-    async function fetchStudents(filter: IFStudent) {
+    async function fetchStudents(filter: IFCollege) {
         setLoader(true)
-        const studentService = new StudentService()
+        const collegeService = new CollegeService()
         const {
             data,
             pagination: _pagination
-        }: IPaginatedResponse<IStudent[]> =
-            await studentService.getStudentsWithFilter(filter)
+        }: IPaginatedResponse<ICollege[]> =
+            await collegeService.getCollegesWithFilter(filter)
         setPagination({
             ...pagination,
             ..._pagination
@@ -52,7 +52,6 @@ export function Overview() {
     return (
         <div className="overview">
             <Table
-                columns={columns}
                 pagination={{
                     onChange: onPageChange,
                     total: pagination.totalRecords,
@@ -66,7 +65,9 @@ export function Overview() {
                     y: 0
                 }}
                 dataSource={students}
-            />
+            >
+                {renderColumns()}
+            </Table>
         </div>
     )
 }

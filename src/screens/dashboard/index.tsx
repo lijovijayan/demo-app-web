@@ -4,6 +4,8 @@ import { FaUserGraduate } from 'react-icons/fa'
 import { GiOrganigram } from 'react-icons/gi'
 import '../../styles/screen.styles/dashboard.scss'
 import { Overview } from './overview'
+import { Colleges } from './colleges'
+import { Students } from './students'
 const { TabPane } = Tabs
 
 export function Dashboard() {
@@ -33,7 +35,7 @@ export function Dashboard() {
                     }
                     key="2"
                 >
-                    Content of Tab Pane 2
+                <Colleges />
                 </TabPane>
                 <TabPane
                     tab={
@@ -44,7 +46,7 @@ export function Dashboard() {
                     }
                     key="3"
                 >
-                    Content of Tab Pane 3
+                <Students />
                 </TabPane>
             </Tabs>
         </div>

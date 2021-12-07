@@ -7,9 +7,10 @@ import {
     IPagination,
     IStudent
 } from '../../../types'
+import Filters from './filters'
 import columns from './table-columns'
 
-export function Overview() {
+export function Students() {
     const [loading, setLoader] = useState(false)
     const [students, setStudents] = useState<IStudent[]>([])
     const [pagination, setPagination] = useState<IPagination>({
@@ -47,10 +48,10 @@ export function Overview() {
         }
         fetchStudents({ pagination: _pagination })
     }
-    console.log(pagination)
 
     return (
         <div className="overview">
+            <Filters />
             <Table
                 columns={columns}
                 pagination={{
@@ -63,7 +64,8 @@ export function Overview() {
                 }}
                 loading={loading}
                 scroll={{
-                    y: 0
+                    y: 0,
+                    x: 0,
                 }}
                 dataSource={students}
             />

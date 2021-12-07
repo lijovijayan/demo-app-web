@@ -1,5 +1,8 @@
 .dashboard {
     .ant-tabs {
+        .ant-tabs-nav-wrap {
+            @apply bg-secondary-thin;
+        }
         .ant-tabs-nav-list {
             .tab-title {
                 min-width: 100px;
@@ -9,13 +12,27 @@
                 }
             }
         }
-    }
-    .ant-table-wrapper {
-        .ant-table-tbody {
-            height: calc(100vh - 400px);
-            max-height: calc(100vh - 400px);
-            overflow: auto;
+        .ant-tabs-content {
+            @apply h-full;
         }
+        @apply h-full;
     }
-    @apply p-3 bg-secondary-light;
+    .overview {
+        .ant-table-wrapper {
+                .ant-table-body {
+                    height: calc(100vh - 260px) !important;
+                    max-height: calc(100vh - 260px) !important;
+                    overflow-y: scroll;
+                }
+            @apply h-full;
+        }
+        .ant-pagination-options-quick-jumper {
+            @apply mr-3;
+        }
+        .filter-container {
+            @apply flex flex-row;
+        }
+        @apply h-full;
+    }
+    @apply bg-secondary-light h-full;
 }
