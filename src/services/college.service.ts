@@ -1,14 +1,19 @@
 import Axios from 'axios'
 import { ENV } from '../config'
-import { ICollege, IFCollege, IPaginatedResponse } from '../types'
+import {
+    ICollege,
+    IFCollege,
+    IPaginatedResponse,
+    ICollegeObject
+} from '../types'
 import { FormatString } from '../utils'
 
 export class CollegeService {
-    getColleges(): Promise<ICollege[]> {
+    getColleges(): Promise<ICollegeObject[]> {
         return new Promise(async (resolve, reject) => {
             try {
                 const { data } = await Axios.get(ENV.api.college.list)
-                const colleges: ICollege[] = data
+                const colleges: ICollegeObject[] = data
                 resolve(colleges)
             } catch (err) {
                 reject(err)
@@ -18,11 +23,11 @@ export class CollegeService {
 
     getCollegesWithFilter(
         filter: IFCollege
-    ): Promise<IPaginatedResponse<ICollege[]>> {
+    ): Promise<IPaginatedResponse<ICollegeObject[]>> {
         return new Promise(async (resolve, reject) => {
             try {
                 const { data } = await Axios.post(ENV.api.college.list, filter)
-                const colleges: IPaginatedResponse<ICollege[]> = data
+                const colleges: IPaginatedResponse<ICollegeObject[]> = data
                 resolve(colleges)
             } catch (err) {
                 reject(err)

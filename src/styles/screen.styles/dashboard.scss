@@ -1,5 +1,8 @@
 .dashboard {
     .ant-tabs {
+        .ant-tabs-nav {
+            @apply mb-0;
+        }
         .ant-tabs-nav-wrap {
             @apply bg-secondary-thin;
         }
@@ -19,18 +22,61 @@
     }
     .overview {
         .ant-table-wrapper {
-                .ant-table-body {
-                    height: calc(100vh - 260px) !important;
-                    max-height: calc(100vh - 260px) !important;
-                    overflow-y: scroll;
-                }
+            .ant-table-body {
+                height: calc(100vh - 260px) !important;
+                max-height: calc(100vh - 260px) !important;
+                overflow-y: scroll;
+            }
             @apply h-full;
         }
         .ant-pagination-options-quick-jumper {
             @apply mr-3;
         }
         .filter-container {
-            @apply flex flex-row;
+            @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2 p-2;
+            .ant-form-item {
+                @apply mb-0;
+            }
+        }
+        @apply h-full;
+    }
+    .colleges {
+        .ant-table-wrapper {
+            .ant-table-body {
+                height: calc(100vh - 285px) !important;
+                max-height: calc(100vh - 285px) !important;
+                overflow-y: scroll;
+            }
+            @apply h-full;
+        }
+        .ant-pagination-options-quick-jumper {
+            @apply mr-3;
+        }
+        .filter-container {
+            @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2 p-2;
+            .ant-form-item {
+                @apply mb-0;
+            }
+        }
+        @apply h-full;
+    }
+    .students {
+        .ant-table-wrapper {
+            .ant-table-body {
+                height: calc(100vh - 285px) !important;
+                max-height: calc(100vh - 285px) !important;
+                overflow-y: scroll;
+            }
+            @apply h-full;
+        }
+        .ant-pagination-options-quick-jumper {
+            @apply mr-3;
+        }
+        .filter-container {
+            @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2 p-2;
+            .ant-form-item {
+                @apply mb-0;
+            }
         }
         @apply h-full;
     }

@@ -1,0 +1,9 @@
+import { STUDENT_FILTER_FORM_CONTROL } from '../../constants'
+
+export interface IStudentFilterForm {
+    [STUDENT_FILTER_FORM_CONTROL.SEARCH_KEY]: string
+    [STUDENT_FILTER_FORM_CONTROL.COLLEGE]: number
+    [STUDENT_FILTER_FORM_CONTROL.SKILL]: number
+    [STUDENT_FILTER_FORM_CONTROL.COURCE]: number
+    [STUDENT_FILTER_FORM_CONTROL.BATCH]: number
+}

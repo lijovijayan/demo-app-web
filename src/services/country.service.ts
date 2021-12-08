@@ -4,7 +4,7 @@ import { ICountry, IFCountry } from '../types'
 import { FormatString } from '../utils'
 
 export class CountryService {
-    getCountrys(): Promise<ICountry[]> {
+    getCountries(): Promise<ICountry[]> {
         return new Promise(async (resolve, reject) => {
             try {
                 const { data } = await Axios.get(ENV.api.country.list)

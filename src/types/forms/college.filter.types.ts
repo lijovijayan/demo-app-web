@@ -1,0 +1,9 @@
+import { COLLEGE_FILTER_FORM_CONTROL } from '../../constants'
+
+export interface ICollegeFilterForm {
+    [COLLEGE_FILTER_FORM_CONTROL.SEARCH_KEY]: string
+    [COLLEGE_FILTER_FORM_CONTROL.COUNTRY]: number
+    [COLLEGE_FILTER_FORM_CONTROL.STATE]: number
+    [COLLEGE_FILTER_FORM_CONTROL.CITY]: number
+    [COLLEGE_FILTER_FORM_CONTROL.COURCE]: number
+}

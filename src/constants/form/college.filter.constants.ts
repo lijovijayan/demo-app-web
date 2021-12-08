@@ -1,0 +1,7 @@
+export enum COLLEGE_FILTER_FORM_CONTROL {
+    SEARCH_KEY = 'SEARCH_KEY',
+    COUNTRY = 'COUNTRY',
+    STATE = 'STATE',
+    CITY = 'CITY',
+    COURCE = 'COURCE'
+}

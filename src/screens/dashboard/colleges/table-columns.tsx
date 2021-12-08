@@ -18,9 +18,24 @@ function renderColumns() {
                 dataIndex="year_founded"
                 key="year_founded"
             />
-            <Column title="City" dataIndex="city" key="city" />
-            <Column title="State" dataIndex="state" key="state" />
-            <Column title="Country" dataIndex="country" key="country" />
+            <Column
+                title="Country"
+                dataIndex="country"
+                key="country"
+                render={(country) => <>{country?.name}</>}
+            />
+            <Column
+                title="State"
+                dataIndex="state"
+                key="state"
+                render={(state) => <>{state?.name}</>}
+            />
+            <Column
+                title="City"
+                dataIndex="city"
+                key="city"
+                render={(city) => <>{city?.name}</>}
+            />
             <Column
                 title="cources"
                 dataIndex="cources"
@@ -29,7 +44,7 @@ function renderColumns() {
                     <>
                         {cources.map((cource: any) => (
                             <Tag color="blue" key={cource}>
-                                {cource}
+                                {cource.name}
                             </Tag>
                         ))}
                     </>

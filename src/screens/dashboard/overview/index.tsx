@@ -5,13 +5,14 @@ import {
     IFStudent,
     IPaginatedResponse,
     IPagination,
-    IStudent
+    IStudentObject
 } from '../../../types'
+import { LineChart } from '../charts/line.chart'
 import columns from './table-columns'
 
 export function Overview() {
     const [loading, setLoader] = useState(false)
-    const [students, setStudents] = useState<IStudent[]>([])
+    const [students, setStudents] = useState<IStudentObject[]>([])
     const [pagination, setPagination] = useState<IPagination>({
         page: 1,
         pageSize: 10,
@@ -29,7 +30,7 @@ export function Overview() {
         const {
             data,
             pagination: _pagination
-        }: IPaginatedResponse<IStudent[]> =
+        }: IPaginatedResponse<IStudentObject[]> =
             await studentService.getStudentsWithFilter(filter)
         setPagination({
             ...pagination,
@@ -51,22 +52,7 @@ export function Overview() {
 
     return (
         <div className="overview">
-            <Table
-                columns={columns}
-                pagination={{
-                    onChange: onPageChange,
-                    total: pagination.totalRecords,
-                    pageSize: pagination.pageSize,
-                    current: pagination.page,
-                    showQuickJumper: true,
-                    pageSizeOptions: ['10', '20', '50']
-                }}
-                loading={loading}
-                scroll={{
-                    y: 0
-                }}
-                dataSource={students}
-            />
+            <LineChart />
         </div>
     )
 }

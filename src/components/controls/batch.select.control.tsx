@@ -21,9 +21,8 @@ export function BatchSelect({ onChange, value }: Props) {
     return (
         <Select
             showSearch
-            style={{ width: 200 }}
-            placeholder="Select a person"
-            optionFilterProp="children"
+            allowClear
+            placeholder="Select batch"
             onChange={onChange}
             options={options}
             value={value}
