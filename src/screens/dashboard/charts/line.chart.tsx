@@ -1,38 +1,55 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2'
+import { CourceService } from '../../../services'
+import { ICource } from '../../../types'
 interface Props {
     data?: any
 }
-export function LineChart({ data }: Props) {
+interface ILineChartData {
+    labels: string[]
+    datasets: {
+        label: string
+        data: number[]
+        borderColor: string
+        backgroundColor: string
+    }[]
+}
+
+function formatData(data: ICource[]): ILineChartData {
+    const records: ILineChartData = {
+        labels: [],
+        datasets: []
+    }
+    data.forEach((_cource) => {
+        records.labels.push(_cource.name)
+        records.datasets.push({
+            backgroundColor: 'red',
+            borderColor: 'red',
+            data: _cource.colleges,
+            label: _cource.name
+        })
+    })
+    return records
+}
+
+export function LineChart() {
+    const [data, setData] = useState<ILineChartData>({
+        labels: [],
+        datasets: []
+    })
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    async function fetchData() {
+        const courceService = new CourceService()
+        const _cources: ICource[] = await courceService.getCources()
+        console.log(formatData(_cources));
+        setData(formatData(_cources))
+    }
     return (
         <div>
-            <Line
-                data={{
-                    labels: [
-                        'January',
-                        'February',
-                        'March',
-                        'April',
-                        'May',
-                        'June',
-                        'July'
-                    ],
-                    datasets: [
-                        {
-                            label: 'Dataset 1',
-                            data: [867, 474, 94, 836, -895, 503, 236],
-                            borderColor: 'rgb(255, 99, 132)',
-                            backgroundColor: 'rgba(255, 99, 132, 0.5)'
-                        },
-                        {
-                            label: 'Dataset 2',
-                            data: [214, -402, 723, 484, 237, -216, -219],
-                            borderColor: 'rgb(53, 162, 235)',
-                            backgroundColor: 'rgba(53, 162, 235, 0.5)'
-                        }
-                    ]
-                }}
-            ></Line>
+            <Line data={data}></Line>
         </div>
     )
 }

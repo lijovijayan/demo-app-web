@@ -14,7 +14,7 @@ import renderColumns from './table-columns'
 
 export function Colleges() {
     const [loading, setLoader] = useState(false)
-    const [students, setStudents] = useState<ICollegeObject[]>([])
+    const [colleges, setColleges] = useState<ICollegeObject[]>([])
     const [pagination, setPagination] = useState<IPagination>({
         page: 1,
         pageSize: 10,
@@ -23,10 +23,10 @@ export function Colleges() {
         totalRecords: 0
     })
     useEffect(() => {
-        fetchStudents({ pagination })
+        fetchColleges({ pagination })
     }, [])
 
-    async function fetchStudents(filter: IFCollege) {
+    async function fetchColleges(filter: IFCollege) {
         filter.pagination.totalRecords = undefined
         setLoader(true)
 
@@ -42,7 +42,7 @@ export function Colleges() {
             ..._pagination
         })
 
-        setStudents(data)
+        setColleges(data)
         setLoader(false)
     }
 
@@ -60,7 +60,7 @@ export function Colleges() {
                 ? [filter[COLLEGE_FILTER_FORM_CONTROL.COURCE]]
                 : undefined
         }
-        fetchStudents(searchFilter)
+        fetchColleges(searchFilter)
     }
 
     function onPageChange(pageNumber: number, pageSize: number) {
@@ -70,7 +70,7 @@ export function Colleges() {
             page: pageNumber,
             pageSize: pageSize
         }
-        fetchStudents({ pagination: _pagination })
+        fetchColleges({ pagination: _pagination })
     }
     console.log(pagination)
 
@@ -90,7 +90,7 @@ export function Colleges() {
                 scroll={{
                     y: 0
                 }}
-                dataSource={students}
+                dataSource={colleges}
             >
                 {renderColumns()}
             </Table>

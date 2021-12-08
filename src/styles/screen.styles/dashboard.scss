@@ -21,24 +21,10 @@
         @apply h-full;
     }
     .overview {
-        .ant-table-wrapper {
-            .ant-table-body {
-                height: calc(100vh - 260px) !important;
-                max-height: calc(100vh - 260px) !important;
-                overflow-y: scroll;
-            }
-            @apply h-full;
+        @apply h-full flex flex-col;
+        & > div {
+            @apply flex-1 flex flex-row;
         }
-        .ant-pagination-options-quick-jumper {
-            @apply mr-3;
-        }
-        .filter-container {
-            @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2 p-2;
-            .ant-form-item {
-                @apply mb-0;
-            }
-        }
-        @apply h-full;
     }
     .colleges {
         .ant-table-wrapper {
