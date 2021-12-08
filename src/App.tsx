@@ -12,7 +12,9 @@ import {
     BarElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    RadialLinearScale,
+    Filler
 } from 'chart.js'
 
 ChartJS.register(
@@ -24,7 +26,9 @@ ChartJS.register(
     BarElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    Filler,
+    RadialLinearScale
 )
 
 function App() {

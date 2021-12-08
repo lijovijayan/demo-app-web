@@ -8,19 +8,14 @@ export function AppHeader() {
                 className="site-page-header"
                 title={
                     <Breadcrumb className="app-breadcrumb">
+                        <Breadcrumb.Item>Oneshot</Breadcrumb.Item>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>
-                            <a href="">Application Center</a>
-                        </Breadcrumb.Item>
-                        <Breadcrumb.Item>
-                            <a href="">Application List</a>
-                        </Breadcrumb.Item>
-                        <Breadcrumb.Item>An Application</Breadcrumb.Item>
+                        <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
                     </Breadcrumb>
                 }
                 extra={[
-                    <Button key="3">PRINT</Button>,
-                    <Button key="2">EXPORT</Button>,
+                    <Button disabled key="3">PRINT</Button>,
+                    <Button disabled key="2">EXPORT</Button>
                 ]}
             ></PageHeader>
         </div>

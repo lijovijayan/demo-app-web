@@ -65,3 +65,118 @@ body {
 ::selection {
     transition: background-color 0.35s;
 }
+.ant-tag-blue {
+    @apply border-primary text-primary bg-primary-thin;
+}
+.ant-tabs-tab {
+    &.ant-tabs-tab-active {
+        @apply border-primary text-primary;
+        .ant-tabs-tab-btn {
+            @apply text-primary;
+        }
+    }
+    &:hover {
+        @apply border-primary text-primary;
+    }
+}
+.ant-tabs-ink-bar {
+    @apply bg-primary;
+}
+.ant-pagination-item {
+    &.ant-pagination-item-active {
+        @apply border-primary text-primary;
+        a {
+            @apply text-primary;
+        }
+    }
+    &:hover {
+        @apply border-primary text-primary;
+        a {
+            @apply text-primary;
+        }
+    }
+}
+
+$loader-neutral: 5px;
+$loader-positive: 10px;
+$loader-negative: -10px;
+$color: #34dba1;
+
+.loading-animation {
+    height: $loader-neutral;
+    width: $loader-neutral;
+    box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+        $loader-negative $loader-negative 0 $loader-neutral $color, $loader-negative $loader-negative 0 $loader-neutral $color,
+        $loader-negative $loader-negative 0 $loader-neutral $color;
+    animation: loading-animation 6s infinite;
+}
+
+@keyframes loading-animation {
+    0% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color;
+    }
+    8.33% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+           $loader-positive $loader-negative 0 $loader-neutral $color,$loader-positive $loader-negative 0 $loader-neutral $color,
+           $loader-positive $loader-negative 0 $loader-neutral $color;
+    }
+    16.66% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+           $loader-positive $loader-negative 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
+           $loader-positive$loader-positive 0 $loader-neutral $color;
+    }
+    24.99% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+           $loader-positive $loader-negative 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color;
+    }
+    33.32% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+           $loader-positive $loader-negative 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color;
+    }
+    41.65% {
+        box-shadow:$loader-positive $loader-negative 0 $loader-neutral $color,
+           $loader-positive $loader-negative 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
+           $loader-positive $loader-negative 0 $loader-neutral $color;
+    }
+    49.98% {
+        box-shadow:$loader-positive$loader-positive 0 $loader-neutral $color,
+           $loader-positive$loader-positive 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
+           $loader-positive$loader-positive 0 $loader-neutral $color;
+    }
+    58.31% {
+        box-shadow: $loader-negative$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color;
+    }
+    66.64% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color;
+    }
+    74.97% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+           $loader-positive $loader-negative 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color;
+    }
+    83.3% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+           $loader-positive$loader-positive 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color;
+    }
+    91.63% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color, $loader-negative$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color;
+    }
+    100% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color;
+    }
+}

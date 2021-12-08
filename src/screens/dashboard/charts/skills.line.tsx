@@ -50,12 +50,8 @@ export function LineChart() {
     async function fetchData() {
         const studentService = new StudentService()
         const students: IStudentObject[] = await studentService.getStudents()
-        console.log(formatData(students));
+        console.log(formatData(students))
         setData(formatData(students))
     }
-    return (
-        <div>
-            <Line data={data}></Line>
-        </div>
-    )
+    return <Line data={data}></Line>
 }

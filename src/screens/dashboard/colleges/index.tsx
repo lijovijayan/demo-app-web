@@ -78,6 +78,11 @@ export function Colleges() {
         <div className="colleges">
             <Filters onChange={onFilterChange} />
             <Table
+                loading={
+                    loading && {
+                        indicator: <div className="loading-animation"></div>
+                    }
+                }
                 pagination={{
                     onChange: onPageChange,
                     total: pagination.totalRecords,
@@ -86,9 +91,9 @@ export function Colleges() {
                     showQuickJumper: true,
                     pageSizeOptions: ['10', '20', '50']
                 }}
-                loading={loading}
                 scroll={{
-                    y: 0
+                    y: 'calc(100vh - 285px)',
+                    x: 'fit-content'
                 }}
                 dataSource={colleges}
             >

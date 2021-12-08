@@ -1,61 +1,61 @@
-import randomColor from 'randomcolor'
 import { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2'
-import { CollegeService } from '../../../services'
-import { ICollegeObject } from '../../../types'
-import { getColorWithOpacity, subString } from '../../../utils'
+import { SkillService } from '../../../services'
+import { ICollegeObject, ISkill } from '../../../types'
+import { getColorWithOpacity } from '../../../utils'
 interface Props {
-    data?: any
+    colleges: ICollegeObject[]
+    setLoader: (loading: boolean) => void
 }
 interface ILineChartData {
     labels: string[]
     datasets: {
         label: string
         data: number[]
+        id: number
         borderColor: string
         backgroundColor: string
+        lineTension: number
     }[]
 }
 
-const colors = []
-
-function formatData(data: ICollegeObject[]): ILineChartData {
-    const color1 = getColorWithOpacity()
-    const color2 = getColorWithOpacity()
-    const records: ILineChartData = {
-        labels: [],
-        datasets: [
-            {
-                backgroundColor: color1.colorWithOpacity,
-                borderColor: color1.color,
-                data: [],
-                label: 'colleges'
-            },
-            {
-                backgroundColor: color2.colorWithOpacity,
-                borderColor: color2.color,
-                data: [],
-                label: 'students'
-            }
-        ]
-    }
-    data.forEach((_college) => {
-        const index = records.labels.findIndex(
-            (_label) => _college.state.name === _label
-        )
-        if (index >= 0) {
-            records.datasets[0].data[index] += 1
-            records.datasets[1].data[index] += _college.students.length
-        } else {
-            records.labels.push(_college.state.name)
-            records.datasets[0].data.push(1)
-            records.datasets[1].data.push(_college.students.length)
+function formatData(
+    colleges: ICollegeObject[],
+    skills: ISkill[]
+): ILineChartData {
+    const labels = colleges.map((_college) => _college.name)
+    const datasets = skills.map((skill, i) => {
+        const colors = getColorWithOpacity()
+        return {
+            backgroundColor: colors.colorWithOpacity,
+            borderColor: colors.color,
+            data: labels.map((_) => 0),
+            id: skill.id,
+            label: skill.name,
+            lineTension: 0.5
         }
+    })
+    const records: ILineChartData = {
+        labels: labels,
+        datasets: datasets
+    }
+    colleges.forEach((_college, collegeIndex) => {
+        _college.students.forEach((_student) => {
+            skills.forEach((_skill, skillIndex) => {
+                if (_skill.students.includes(_student)) {
+                    records.datasets[skillIndex].data[collegeIndex] += 1
+                }
+            })
+        })
     })
     return records
 }
 
-export function NumberOfStudentsAndCollegesLineChart() {
+export function NumberOfStudentsAndCollegesLineChart({
+    colleges,
+    setLoader
+}: Props) {
+    const [skills, setSkills] = useState<ISkill[]>([])
     const [data, setData] = useState<ILineChartData>({
         labels: [],
         datasets: []
@@ -64,15 +64,34 @@ export function NumberOfStudentsAndCollegesLineChart() {
         fetchData()
     }, [])
 
+    useEffect(() => {
+        if (colleges.length > 0 && skills.length > 0) {
+            setData(formatData(colleges, skills))
+        }
+    }, [colleges, skills])
+
     async function fetchData() {
-        const collegeService = new CollegeService()
-        const students: ICollegeObject[] = await collegeService.getColleges()
-        console.log(formatData(students))
-        setData(formatData(students))
+        setLoader(true)
+        const skillService = new SkillService()
+        const _skills: ISkill[] = await skillService.getSkills()
+        setSkills(_skills)
+        setLoader(false)
     }
     return (
-        <div>
-            <Line data={data}></Line>
-        </div>
+        <Line
+            options={{
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            callback: function (value, index, values) {
+                                return index + 1
+                            }
+                        }
+                    }
+                }
+            }}
+            data={data}
+        ></Line>
     )
 }

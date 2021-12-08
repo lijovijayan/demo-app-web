@@ -84,10 +84,14 @@ export function Students() {
                     showQuickJumper: true,
                     pageSizeOptions: ['10', '20', '50']
                 }}
-                loading={loading}
+                loading={
+                    loading && {
+                        indicator: <div className="loading-animation"></div>
+                    }
+                }
                 scroll={{
-                    y: 0,
-                    x: 0
+                    y: 'calc(100vh - 285px)',
+                    x: 'fit-content'
                 }}
                 dataSource={students}
             >

@@ -21,50 +21,115 @@
         @apply h-full;
     }
     .overview {
-        @apply h-full flex flex-col;
+        height: calc(100vh - 120px);
+        @apply grid gap-2 p-3 relative;
+        grid-template-rows: repeat(12, 1fr);
+        grid-template-columns: repeat(12, 1fr);
+        grid-template:
+            'line line line line line line line line radar radar radar radar'
+            'line line line line line line line line radar radar radar radar'
+            'line line line line line line line line radar radar radar radar'
+            'line line line line line line line line radar radar radar radar'
+            'line line line line line line line line radar radar radar radar'
+            'line line line line line line line line radar radar radar radar'
+            'line line line line line line line line radar radar radar radar'
+            'line line line line line line line line radar radar radar radar'
+            'd1 d1 d2 d2 d3 d3 bar bar bar bar bar bar'
+            'd1 d1 d2 d2 d3 d3 bar bar bar bar bar bar'
+            'd1 d1 d2 d2 d3 d3 bar bar bar bar bar bar'
+            'd1 d1 d2 d2 d3 d3 bar bar bar bar bar bar';
         & > div {
-            @apply flex-1 flex flex-row;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+            @apply bg-secondary-thin p-2;
+            // @apply h-full w-full;
+            // & > * {
+            //     @apply h-full;
+            // }
+            // & * {
+            //     display: none !important;
+            // }
+        }
+        &.charts-loading {
+            & > div {
+                * {
+                    display: none !important;
+                }
+            }
+        }
+        &.charts-loaded {
+            .loading-layer {
+                @apply h-0 w-0 hidden;
+            }
+        }
+        .loading-layer {
+            .loading-animation {
+                display: block !important;
+            }
+            background-color: #e3e3e366;
+            transition: background-color 0.3s; 
+            @apply h-full w-full absolute top-0 left-0 flex items-center justify-center;
+        }
+
+        & > div {
+            &:nth-child(1) {
+                grid-area: d1;
+            }
+        }
+        & > div {
+            &:nth-child(2) {
+                grid-area: d2;
+            }
+        }
+        & > div {
+            &:nth-child(3) {
+                grid-area: d3;
+            }
+        }
+        & > div {
+            &:nth-child(4) {
+                grid-area: radar;
+            }
+        }
+        & > div {
+            &:nth-child(5) {
+                grid-area: bar;
+            }
+        }
+        & > div {
+            &:nth-child(6) {
+                grid-area: line;
+            }
         }
     }
     .colleges {
         .ant-table-wrapper {
             .ant-table-body {
-                height: calc(100vh - 285px) !important;
-                max-height: calc(100vh - 285px) !important;
-                overflow-y: scroll;
+                min-height: calc(100vh - 285px) !important;
             }
             @apply h-full;
         }
         .ant-pagination-options-quick-jumper {
             @apply mr-3;
-        }
-        .filter-container {
-            @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2 p-2;
-            .ant-form-item {
-                @apply mb-0;
-            }
         }
         @apply h-full;
     }
     .students {
         .ant-table-wrapper {
             .ant-table-body {
-                height: calc(100vh - 285px) !important;
-                max-height: calc(100vh - 285px) !important;
-                overflow-y: scroll;
+                min-height: calc(100vh - 285px) !important;
             }
             @apply h-full;
         }
         .ant-pagination-options-quick-jumper {
             @apply mr-3;
         }
-        .filter-container {
-            @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2 p-2;
-            .ant-form-item {
-                @apply mb-0;
-            }
-        }
         @apply h-full;
+    }
+    .filter-container {
+        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2 p-2 pb-3;
+        .ant-form-item {
+            @apply mb-0;
+        }
     }
     @apply bg-secondary-light h-full;
 }

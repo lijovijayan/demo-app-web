@@ -44,12 +44,8 @@ export function LineChart() {
     async function fetchData() {
         const courceService = new CourceService()
         const _cources: ICource[] = await courceService.getCources()
-        console.log(formatData(_cources));
+        console.log(formatData(_cources))
         setData(formatData(_cources))
     }
-    return (
-        <div>
-            <Line data={data}></Line>
-        </div>
-    )
+    return <Line data={data}></Line>
 }

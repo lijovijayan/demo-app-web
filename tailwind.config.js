@@ -10,6 +10,7 @@ module.exports = {
                     DEFAULT: '#34dba1',
                     light: '#1c212d',
                     dark: '#161a24',
+                    thin: '#34dba11a',
                     transparent: '#636d7b'
                 },
 

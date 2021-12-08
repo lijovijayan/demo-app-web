@@ -38,6 +38,8 @@ function formatData(data: ISkill[]): IBarChartData {
 }
 
 const options = {
+    
+    maintainAspectRatio: false,
     plugins: {
         legend: {
             display: false
@@ -59,9 +61,5 @@ export function SkillsBarChart() {
         console.log(formatData(skills))
         setData(formatData(skills))
     }
-    return (
-        <div>
-            <Bar data={data} options={options}></Bar>
-        </div>
-    )
+    return <Bar data={data} options={options}></Bar>
 }

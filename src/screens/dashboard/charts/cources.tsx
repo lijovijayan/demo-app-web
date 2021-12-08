@@ -45,21 +45,25 @@ function formatData(data: ICource[]): IDoughnutChartData {
     return records
 }
 
-const options = {
-    plugins: {
-        legend: {
-            display: false
-        }
-    }
-}
 export function CourcesChart() {
     const [data, setData] = useState<IDoughnutChartData>({
         labels: [],
         datasets: []
     })
+
     useEffect(() => {
         fetchData()
     }, [])
+
+    const options = {
+        
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
 
     async function fetchData() {
         const courceService = new CourceService()
@@ -67,9 +71,5 @@ export function CourcesChart() {
         console.log(formatData(_cources))
         setData(formatData(_cources))
     }
-    return (
-        <div>
-            <Doughnut data={data} options={options}></Doughnut>
-        </div>
-    )
+    return <Doughnut data={data} options={options}></Doughnut>
 }
