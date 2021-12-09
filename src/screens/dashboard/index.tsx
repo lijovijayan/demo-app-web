@@ -6,15 +6,13 @@ import '../../styles/screen.styles/dashboard.scss'
 import { Overview } from './overview'
 import { Colleges } from './colleges'
 import { Students } from './students'
+
 const { TabPane } = Tabs
 
 export function Dashboard() {
-    function onTabChange(activeKey: string) {
-        console.log(activeKey)
-    }
     return (
         <div className="dashboard">
-            <Tabs defaultActiveKey="1" onChange={onTabChange}>
+            <Tabs defaultActiveKey="1">
                 <TabPane
                     tab={
                         <div className="tab-title">
@@ -35,7 +33,7 @@ export function Dashboard() {
                     }
                     key="2"
                 >
-                <Colleges />
+                    <Colleges />
                 </TabPane>
                 <TabPane
                     tab={
@@ -46,7 +44,7 @@ export function Dashboard() {
                     }
                     key="3"
                 >
-                <Students />
+                    <Students />
                 </TabPane>
             </Tabs>
         </div>

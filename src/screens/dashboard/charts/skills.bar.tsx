@@ -3,20 +3,8 @@ import { Bar } from 'react-chartjs-2'
 import { SkillService } from '../../../services'
 import { ISkill } from '../../../types'
 import randomColor from 'randomcolor'
-import { subString } from '../../../utils'
 import { useChartUpdate } from '../../../hooks'
-
-interface Props {
-    data?: any
-}
-interface IBarChartData {
-    labels: string[]
-    datasets: {
-        label: string
-        data: number[]
-        backgroundColor: string
-    }[]
-}
+import { IBarChartData } from '../../../types/chart.types'
 
 function formatData(data: ISkill[]): IBarChartData {
     const records: IBarChartData = {
@@ -69,7 +57,6 @@ export function SkillsBarChart() {
     async function fetchData() {
         const skillService = new SkillService()
         const skills: ISkill[] = await skillService.getSkills()
-        console.log(formatData(skills))
         setData(formatData(skills))
     }
     return (

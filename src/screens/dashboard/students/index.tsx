@@ -24,6 +24,7 @@ export function Students() {
         searchKey: '',
         totalRecords: 0
     })
+
     useEffect(() => {
         fetchStudents({ pagination })
     }, [])
@@ -74,6 +75,7 @@ export function Students() {
         setStudents(data)
         setLoader(false)
     }
+    
     function onPageChange(pageNumber: number, pageSize: number) {
         const _pagination = {
             ...pagination,

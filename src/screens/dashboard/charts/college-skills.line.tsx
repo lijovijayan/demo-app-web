@@ -4,20 +4,35 @@ import { useChartUpdate } from '../../../hooks'
 import { SkillService } from '../../../services'
 import { ICollegeObject, ISkill } from '../../../types'
 import { getColorWithOpacity } from '../../../utils'
+import { ILineChartData } from '../../../types/chart.types'
+
 interface Props {
     colleges: ICollegeObject[]
     setLoader: (loading: boolean) => void
 }
-interface ILineChartData {
-    labels: string[]
-    datasets: {
-        label: string
-        data: number[]
-        id: number
-        borderColor: string
-        backgroundColor: string
-        lineTension: number
-    }[]
+
+const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        title: {
+            text: 'Number of students with specific skills in each colleges',
+            display: true,
+            padding: 3,
+            font: {
+                weight: 'normal'
+            }
+        }
+    },
+    scales: {
+        x: {
+            ticks: {
+                callback: (value: any, index: number, values: any[]) => {
+                    return index + 1
+                }
+            }
+        }
+    }
 }
 
 function formatData(
@@ -36,10 +51,12 @@ function formatData(
             lineTension: 0.5
         }
     })
+
     const records: ILineChartData = {
         labels: labels,
         datasets: datasets
     }
+
     colleges.forEach((_college, collegeIndex) => {
         _college.students.forEach((_student) => {
             skills.forEach((_skill, skillIndex) => {
@@ -63,14 +80,14 @@ export function NumberOfStudentsAndCollegesLineChart({
         datasets: []
     })
     useEffect(() => {
-        fetchData()
-    }, [])
-
-    useEffect(() => {
         if (colleges.length > 0 && skills.length > 0) {
             setData(formatData(colleges, skills))
         }
     }, [colleges, skills])
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     async function fetchData() {
         setLoader(true)
@@ -79,33 +96,11 @@ export function NumberOfStudentsAndCollegesLineChart({
         setSkills(_skills)
         setLoader(false)
     }
+
     return (
         <Line
             ref={(_ref) => chartRef.current}
-            options={{
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    title: {
-                        text: 'Number of students with specific skills in each colleges',
-                        // color: 'red',
-                        display: true,
-                        padding: 3,
-                        font: {
-                            weight: "normal"
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            callback: function (value, index, values) {
-                                return index + 1
-                            }
-                        }
-                    }
-                }
-            }}
+            options={options}
             data={data}
         ></Line>
     )

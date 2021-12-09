@@ -5,17 +5,7 @@ import { ICource } from '../../../types'
 import randomColor from 'randomcolor'
 import { subString } from '../../../utils'
 import { useChartUpdate } from '../../../hooks'
-
-interface IRadarChartData {
-    labels: string[]
-    datasets: {
-        label: string
-        data: number[]
-        backgroundColor: string
-        borderColor: string
-        borderWidth: 1
-    }[]
-}
+import { IRadarChartData } from '../../../types/chart.types'
 
 function formatData(data: ICource[]): IRadarChartData {
     const color = randomColor({
@@ -34,10 +24,12 @@ function formatData(data: ICource[]): IRadarChartData {
             }
         ]
     }
+
     data.forEach((_cource) => {
         records.labels.push(_cource.name)
         records.datasets[0].data.push(_cource.colleges.length)
     })
+
     return records
 }
 
@@ -50,7 +42,6 @@ const options = {
         },
         title: {
             text: 'Number of colleges offering specific cources',
-            // color: 'red',
             display: true,
             padding: 3,
             font: {
@@ -59,12 +50,14 @@ const options = {
         }
     }
 }
+
 export function CourcesRadarChart() {
     const chartRef = useChartUpdate()
     const [data, setData] = useState<IRadarChartData>({
         labels: [],
         datasets: []
     })
+
     useEffect(() => {
         fetchData()
     }, [])

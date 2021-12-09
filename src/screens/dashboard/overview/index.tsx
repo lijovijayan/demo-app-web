@@ -1,5 +1,5 @@
 import { SkillsBarChart } from '../charts/skills.bar'
-import { NumberOfStudentsAndCollegesLineChart } from '../charts/college-students-country.line'
+import { NumberOfStudentsAndCollegesLineChart } from '../charts/college-skills.line'
 import { CourcesRadarChart } from '../charts/cources.radar'
 import { CountriesDaughnutChart } from '../charts/countries.doughnut'
 import { useEffect, useState } from 'react'
@@ -16,6 +16,11 @@ export interface IDashboardLocation {
 export function Overview() {
     const [colleges, setColleges] = useState<ICollegeObject[]>([])
     const [loading, setLoader] = useState<boolean>(true)
+    const [location, setLocation] = useState<IDashboardLocation>({
+        country: 0,
+        state: 0
+    })
+
     useEffect(() => {
         fetchData()
     }, [])
@@ -25,10 +30,6 @@ export function Overview() {
         const colleges: ICollegeObject[] = await collegeService.getColleges()
         setColleges(colleges)
     }
-    const [location, setLocation] = useState<IDashboardLocation>({
-        country: 0,
-        state: 0
-    })
 
     function onLocationChange(_location: Partial<IDashboardLocation>) {
         setLocation({
@@ -36,6 +37,7 @@ export function Overview() {
             ..._location
         })
     }
+
     const { country, state } = location
 
     function renderCountries() {
@@ -51,6 +53,7 @@ export function Overview() {
             </div>
         )
     }
+
     function renderStates() {
         return (
             <div>
@@ -63,6 +66,7 @@ export function Overview() {
             </div>
         )
     }
+
     function renderCities() {
         return (
             <div>
@@ -70,6 +74,7 @@ export function Overview() {
             </div>
         )
     }
+
     function renderCources() {
         return (
             <div>
@@ -77,6 +82,7 @@ export function Overview() {
             </div>
         )
     }
+
     function renderSkills() {
         return (
             <div>
@@ -84,6 +90,7 @@ export function Overview() {
             </div>
         )
     }
+    
     function renderColleges() {
         return (
             <div>
@@ -94,6 +101,7 @@ export function Overview() {
             </div>
         )
     }
+    
     return (
         <div
             className={`overview ${

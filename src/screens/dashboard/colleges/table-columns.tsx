@@ -3,7 +3,6 @@ import { Table, Tag } from 'antd'
 
 const { Column } = Table
 
-export default renderColumns
 function renderColumns() {
     return (
         <>
@@ -59,3 +58,5 @@ function renderColumns() {
         </>
     )
 }
+
+export default renderColumns

@@ -7,23 +7,12 @@ import { Tooltip } from 'antd'
 import { AiOutlineExclamationCircle } from 'react-icons/ai'
 import Cookies from 'universal-cookie'
 import { useChartUpdate } from '../../../hooks'
+import { IDoughnutChartData } from '../../../types/chart.types'
 
 interface Props {
     country: number
     onCountryChange: (country: number) => void
     colleges: ICollegeObject[]
-}
-
-interface IDoughnutChartData {
-    labels: string[]
-    datasets: {
-        ids: number[]
-        label: string
-        data: number[]
-        backgroundColor: string[]
-        borderColor: string[]
-        borderWidth: 1
-    }[]
 }
 
 function formatData(data: ICollegeObject[]): IDoughnutChartData {
@@ -52,7 +41,8 @@ function formatData(data: ICollegeObject[]): IDoughnutChartData {
             records.datasets[0].data[index] += 1
         } else {
             records.labels.push(_college.country.name)
-            records.datasets[0].ids.push(_college.country.id)
+            records.datasets[0].ids &&
+                records.datasets[0].ids.push(_college.country.id)
             records.datasets[0].data.push(1)
             records.datasets[0].backgroundColor.push(colorWithOpacity)
             records.datasets[0].borderColor.push(color)
@@ -71,14 +61,20 @@ export function CountriesDaughnutChart({
         labels: [],
         datasets: []
     })
+
     useEffect(() => {
         const cookies = new Cookies()
         const showIndicator = 0 !== +cookies.get('hideIndicator')
-        console.log(showIndicator, {
-            hideIndicator: cookies.get('hideIndicator')
-        })
         setIndicator(showIndicator)
     }, [])
+
+    useEffect(() => {
+        const _data = formatData(colleges)
+        setData(_data)
+        if (country <= 0 && _data.datasets[0].data.length > 0) {
+            onCountryChange(_data.datasets[0].ids?.[0] || 0)
+        }
+    }, [colleges])
 
     function removeIndicator() {
         const cookies = new Cookies()
@@ -86,21 +82,14 @@ export function CountriesDaughnutChart({
         setIndicator(false)
     }
 
-    useEffect(() => {
-        const _data = formatData(colleges)
-        setData(_data)
-        if (country <= 0 && _data.datasets[0].data.length > 0) {
-            onCountryChange(_data.datasets[0].ids[0])
-        }
-    }, [colleges])
-
     const options = {
         responsive: true,
         onClick: (e: any, item: any) => {
             const datasetIndex = item?.[0]?.datasetIndex
             const index = item?.[0]?.index
             if (index >= 0 && datasetIndex >= 0) {
-                const countryId: number = data.datasets[datasetIndex].ids[index]
+                const countryId: number =
+                    data.datasets[datasetIndex].ids?.[index] || 0
                 countryId !== country && onCountryChange(countryId)
                 indicator && removeIndicator()
             }
@@ -112,7 +101,7 @@ export function CountriesDaughnutChart({
                 display: true,
                 padding: 3,
                 font: {
-                    weight: "normal"
+                    weight: 'normal'
                 }
             }
         }
@@ -124,12 +113,11 @@ export function CountriesDaughnutChart({
                 ref={(_ref) => (chartRef.current = _ref)}
                 data={data}
                 options={options}
-            >
-            </Doughnut>
+            ></Doughnut>
 
             {indicator && (
                 <Tooltip
-                placement="left"
+                    placement="left"
                     title="click on each sections to filter states and cities"
                     color={'#34dba1'}
                 >

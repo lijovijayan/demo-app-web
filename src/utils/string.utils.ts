@@ -5,6 +5,7 @@ export function FormatString(str: string, ...val: any[]): string {
     }
     return _str
 }
+
 export function subString(str: string, start: string, end: string): string {
     return str.substring(str.indexOf(start) + 1, str.lastIndexOf(end))
 }

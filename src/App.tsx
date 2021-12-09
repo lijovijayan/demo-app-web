@@ -16,8 +16,8 @@ import {
     RadialLinearScale,
     Filler
 } from 'chart.js'
-import { useEffect } from 'react'
 
+// charts JS - registering components
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -31,6 +31,7 @@ ChartJS.register(
     Filler,
     RadialLinearScale
 )
+// END - charts JS - registering components
 
 function App() {
     return (

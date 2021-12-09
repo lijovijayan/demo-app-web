@@ -14,9 +14,11 @@ interface Props {
 export function CountrySelect({ onChange, value }: Props) {
     const [options, setOptions] = useState<IOption[]>([])
     const [loading, setLoader] = useState<boolean>(false)
+    
     useEffect(() => {
         fetchCountries()
     }, [])
+    
     async function fetchCountries() {
         setLoader(true)
         const countryService = new CountryService()

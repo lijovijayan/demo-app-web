@@ -14,9 +14,11 @@ interface Props {
 export function SkillSelect({ onChange, value }: Props) {
     const [options, setOptions] = useState<IOption[]>([])
     const [loading, setLoader] = useState<boolean>(false)
+    
     useEffect(() => {
         fetchSkills()
     }, [])
+    
     async function fetchSkills() {
         setLoader(true)
         const skillService = new SkillService()

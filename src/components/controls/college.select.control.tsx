@@ -14,9 +14,11 @@ interface Props {
 export function CollegeSelect({ onChange, value }: Props) {
     const [options, setOptions] = useState<IOption[]>([])
     const [loading, setLoader] = useState<boolean>(false)
+    
     useEffect(() => {
         fetchColleges()
     }, [])
+
     async function fetchColleges() {
         setLoader(true)
         const collegeService = new CollegeService()

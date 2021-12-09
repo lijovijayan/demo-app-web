@@ -11,3 +11,11 @@ export function getColorWithOpacity() {
         colorWithOpacity
     }
 }
+
+export function disableAutoComplete() {
+    setTimeout(() => {
+        document.querySelectorAll('input').forEach((e) => {
+            e.setAttribute('autocomplete', 'oneshot-prevent-autocomplete')
+        })
+    }, 1000)
+}

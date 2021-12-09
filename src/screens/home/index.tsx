@@ -1,5 +1,3 @@
-import React from 'react'
-
 export function HomePage() {
-    return <div></div>
+    return <div>Home Page</div>
 }

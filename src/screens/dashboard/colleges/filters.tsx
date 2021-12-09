@@ -9,6 +9,7 @@ import {
 import {} from 'antd/lib/form/Form'
 import { ICollegeFilterForm } from '../../../types'
 import { COLLEGE_FILTER_FORM_CONTROL } from '../../../constants'
+import { disableAutoComplete } from '../../../utils'
 
 const { Search } = Input
 
@@ -18,16 +19,6 @@ interface Props {
 
 const { useForm, Item } = Form
 function Filters({ onChange }: Props) {
-    const disableAutoComplete = () => {
-        setTimeout(() => {
-            document.querySelectorAll('input').forEach((e) => {
-                e.setAttribute('autocomplete', 'oneshot-prevent-autocomplete')
-            })
-        }, 1000)
-    }
-    useEffect(() => {
-        disableAutoComplete()
-    }, [])
     const [form] = useForm<ICollegeFilterForm>()
     const [formData, setFormData] = useState<ICollegeFilterForm>({
         [COLLEGE_FILTER_FORM_CONTROL.SEARCH_KEY]: '',
@@ -36,9 +27,11 @@ function Filters({ onChange }: Props) {
         [COLLEGE_FILTER_FORM_CONTROL.CITY]: 0,
         [COLLEGE_FILTER_FORM_CONTROL.COURCE]: 0
     })
-    function onSearch(searchKey: string) {
-        console.log(searchKey)
-    }
+
+    useEffect(() => {
+        disableAutoComplete()
+    }, [])
+
     function onValuesChange(
         value: Partial<ICollegeFilterForm>,
         values: ICollegeFilterForm
@@ -54,6 +47,7 @@ function Filters({ onChange }: Props) {
         onChange(values)
         setFormData({ ...formData, ...values })
     }
+
     return (
         <Form
             form={form}
@@ -65,7 +59,6 @@ function Filters({ onChange }: Props) {
             <Item name={[COLLEGE_FILTER_FORM_CONTROL.SEARCH_KEY]}>
                 <Search
                     placeholder="student name"
-                    onSearch={onSearch}
                     allowClear
                 />
             </Item>

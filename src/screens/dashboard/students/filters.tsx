@@ -17,17 +17,17 @@ interface Props {
 }
 
 const { useForm, Item } = Form
+
 function Filters({ onChange }: Props) {
     const [form] = useForm<IStudentFilterForm>()
-    function onSearch(searchKey: string) {
-        console.log(searchKey)
-    }
+
     function onValuesChange(
         _: Partial<IStudentFilterForm>,
         values: IStudentFilterForm
     ) {
         onChange(values)
     }
+    
     return (
         <Form
             form={form}
@@ -35,7 +35,7 @@ function Filters({ onChange }: Props) {
             onValuesChange={onValuesChange}
         >
             <Item name={[STUDENT_FILTER_FORM_CONTROL.SEARCH_KEY]}>
-                <Search placeholder="college name" onSearch={onSearch} allowClear />
+                <Search placeholder="college name" allowClear />
             </Item>
             <Item name={[STUDENT_FILTER_FORM_CONTROL.BATCH]}>
                 <BatchSelect />

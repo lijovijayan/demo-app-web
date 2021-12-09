@@ -4,24 +4,13 @@ import randomColor from 'randomcolor'
 import { ICollegeObject } from '../../../types'
 import { subString } from '../../../utils'
 import { useChartUpdate } from '../../../hooks'
+import { IDoughnutChartData } from '../../../types/chart.types'
 
 interface Props {
     country: number
     state: number
     colleges: ICollegeObject[]
     onStateChange: (state: number) => void
-}
-
-interface IDoughnutChartData {
-    labels: string[]
-    datasets: {
-        label: string
-        data: number[]
-        ids: number[]
-        backgroundColor: string[]
-        borderColor: string[]
-        borderWidth: 1
-    }[]
 }
 
 function formatData(
@@ -54,7 +43,7 @@ function formatData(
             records.datasets[0].data[index] += 1
         } else {
             records.labels.push(_college.state.name)
-            records.datasets[0].ids.push(_college.state.id)
+            records.datasets[0].ids && records.datasets[0].ids.push(_college.state.id)
             records.datasets[0].data.push(1)
             records.datasets[0].backgroundColor.push(colorWithOpacity)
             records.datasets[0].borderColor.push(color)
@@ -74,6 +63,14 @@ export function StatesDaughnutChart({
         datasets: []
     })
 
+    useEffect(() => {
+        const _data = formatData(colleges, country)
+        setData(_data)
+        if (state <= 0 && _data.datasets[0].data.length > 0) {
+            onStateChange(_data.datasets[0]?.ids?.[0] || 0)
+        }
+    }, [colleges, country])
+
     const options = {
         responsive: true,
         maintainAspectRatio: false,
@@ -81,33 +78,22 @@ export function StatesDaughnutChart({
             const datasetIndex = item?.[0]?.datasetIndex
             const index = item?.[0]?.index
             if (index >= 0 && datasetIndex >= 0) {
-                const countryId: number = data.datasets[datasetIndex].ids[index]
+                const countryId: number =
+                    data.datasets[datasetIndex]?.ids?.[index] || 0
                 onStateChange(countryId)
             }
         },
         plugins: {
             title: {
                 text: 'States',
-                // color: 'red',
                 display: true,
                 padding: 3,
                 font: {
-                    weight: "normal"
+                    weight: 'normal'
                 }
             }
-            // legend: {
-            //     display: false
-            // }
         }
     }
-
-    useEffect(() => {
-        const _data = formatData(colleges, country)
-        setData(_data)
-        if (state <= 0 && _data.datasets[0].data.length > 0) {
-            onStateChange(_data.datasets[0].ids[0])
-        }
-    }, [colleges, country])
 
     return (
         <Doughnut

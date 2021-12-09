@@ -16,6 +16,7 @@ export function SlideUpAnimation({
 }: Props) {
     const wrapperRef = useRef<HTMLDivElement | null>(null)
     const contentWrapperRef = useRef<HTMLDivElement | null>(null)
+    
     useEffect(() => {
         const observer = new IntersectionObserver(
             (

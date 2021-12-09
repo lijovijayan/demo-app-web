@@ -24,6 +24,7 @@ export function Colleges() {
         searchKey: '',
         totalRecords: 0
     })
+
     useEffect(() => {
         fetchColleges({ pagination })
     }, [])
@@ -76,7 +77,6 @@ export function Colleges() {
     }
 
     function onPageChange(pageNumber: number, pageSize: number) {
-        console.log({ pageNumber, pageSize })
         const _pagination = {
             ...pagination,
             page: pageNumber,
@@ -87,7 +87,6 @@ export function Colleges() {
             ...filter
         })
     }
-    console.log(pagination)
 
     return (
         <div className="colleges">
