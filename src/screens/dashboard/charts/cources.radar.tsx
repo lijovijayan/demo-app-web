@@ -16,7 +16,7 @@ function formatData(data: ICource[]): IRadarChartData {
         labels: [],
         datasets: [
             {
-                label: 'Countries',
+                label: 'Colleges',
                 data: [],
                 backgroundColor: colorWithOpacity,
                 borderColor: color,
@@ -41,7 +41,7 @@ const options = {
             display: false
         },
         title: {
-            text: 'Number of colleges offering specific cources',
+            text: 'Number of colleges offering engineering cources',
             display: true,
             padding: 3,
             font: {

@@ -16,7 +16,7 @@ const options = {
     maintainAspectRatio: false,
     plugins: {
         title: {
-            text: 'Number of students with specific skills in each colleges',
+            text: 'Skill chart of students in each colleges',
             display: true,
             padding: 3,
             font: {
