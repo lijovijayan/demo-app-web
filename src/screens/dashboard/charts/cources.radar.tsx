@@ -4,6 +4,7 @@ import { CourceService } from '../../../services'
 import { ICource } from '../../../types'
 import randomColor from 'randomcolor'
 import { subString } from '../../../utils'
+import { useChartUpdate } from '../../../hooks'
 
 interface IRadarChartData {
     labels: string[]
@@ -41,15 +42,25 @@ function formatData(data: ICource[]): IRadarChartData {
 }
 
 const options = {
-    
+    responsive: true,
     maintainAspectRatio: false,
     plugins: {
         legend: {
             display: false
+        },
+        title: {
+            text: 'Number of colleges offering specific cources',
+            // color: 'red',
+            display: true,
+            padding: 3,
+            font: {
+                weight: "normal"
+            }
         }
     }
 }
 export function CourcesRadarChart() {
+    const chartRef = useChartUpdate()
     const [data, setData] = useState<IRadarChartData>({
         labels: [],
         datasets: []
@@ -66,6 +77,7 @@ export function CourcesRadarChart() {
 
     return (
         <Radar
+            ref={(_ref) => (chartRef.current = _ref)}
             data={data}
             options={options}
             style={{ width: '100%', height: '100%' }}

@@ -15,9 +15,9 @@ export function CountrySelect({ onChange, value }: Props) {
     const [options, setOptions] = useState<IOption[]>([])
     const [loading, setLoader] = useState<boolean>(false)
     useEffect(() => {
-        fetchColleges()
+        fetchCountries()
     }, [])
-    async function fetchColleges() {
+    async function fetchCountries() {
         setLoader(true)
         const countryService = new CountryService()
         try {

@@ -1,26 +1,177 @@
 @import './theme.scss';
-.hover-underline-animation {
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-    &:after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        transform: scaleX(0);
-        height: 1px;
-        bottom: 0;
-        left: 0;
-        background-color: $primary;
-        transform-origin: bottom right;
-        transition: transform 0.25s ease-out;
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    @apply bg-secondary-thin;
+}
+
+/* background of the scrollbar except button or resizer */
+::-webkit-scrollbar-track {
+    @apply bg-secondary-thin;
+    &:hover {
+        @apply bg-secondary-thin;
+    }
+}
+
+/* scrollbar itself */
+::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    border: 3px solid white;
+    background-color: #b7b7b7a1;
+}
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-secondary-thin;
+}
+
+/* set button(top and bottom of the scrollbar) */
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+::selection {
+    transition: background-color 0.35s;
+}
+.ant-tag-blue {
+    @apply border-primary text-primary bg-primary-thin;
+}
+.ant-tabs-tab {
+    &.ant-tabs-tab-active {
+        @apply border-primary text-primary;
+        .ant-tabs-tab-btn {
+            @apply text-primary;
+        }
     }
     &:hover {
-        color: $primary !important;
-        &:after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
+        @apply border-primary text-primary;
+    }
+}
+.ant-tabs-ink-bar {
+    @apply bg-primary;
+}
+.ant-pagination-item {
+    &.ant-pagination-item-active {
+        @apply border-primary text-primary;
+        a {
+            @apply text-primary;
+        }
+    }
+    &:hover {
+        @apply border-primary text-primary;
+        a {
+            @apply text-primary;
         }
     }
 }
 
+$loader-neutral: 5px;
+$loader-positive: 10px;
+$loader-negative: -10px;
+$color: #34dba1;
+
+.loading-animation {
+    height: $loader-neutral;
+    width: $loader-neutral;
+    box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+        $loader-negative $loader-negative 0 $loader-neutral $color,
+        $loader-negative $loader-negative 0 $loader-neutral $color,
+        $loader-negative $loader-negative 0 $loader-neutral $color;
+    animation: loading-animation 6s infinite;
+}
+
+@keyframes loading-animation {
+    0% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color;
+    }
+    8.33% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-positive $loader-negative 0 $loader-neutral $color,
+            $loader-positive $loader-negative 0 $loader-neutral $color,
+            $loader-positive $loader-negative 0 $loader-neutral $color;
+    }
+    16.66% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-positive $loader-negative 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color;
+    }
+    24.99% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-positive $loader-negative 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color;
+    }
+    33.32% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-positive $loader-negative 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color;
+    }
+    41.65% {
+        box-shadow: $loader-positive $loader-negative 0 $loader-neutral $color,
+            $loader-positive $loader-negative 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-positive $loader-negative 0 $loader-neutral $color;
+    }
+    49.98% {
+        box-shadow: $loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color;
+    }
+    58.31% {
+        box-shadow: $loader-negative$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color;
+    }
+    66.64% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color;
+    }
+    74.97% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-positive $loader-negative 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color;
+    }
+    83.3% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-positive$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color;
+    }
+    91.63% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color,
+            $loader-negative$loader-positive 0 $loader-neutral $color;
+    }
+    100% {
+        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color,
+            $loader-negative $loader-negative 0 $loader-neutral $color;
+    }
+}
+
+@keyframes blinker {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.blink {
+	animation-name: blinker;
+	animation-duration: 0.6s;
+	animation-iteration-count:infinite;
+	animation-timing-function:ease-in-out;
+	animation-direction: alternate;
+}

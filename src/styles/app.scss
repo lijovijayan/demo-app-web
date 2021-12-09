@@ -6,6 +6,25 @@ body {
     font-family: 'Open Sans';
     // font-family: 'Lato';
     .app-container {
+        .not-implemented {
+            @apply hidden h-0 w-0;
+        }
+        @media only screen and (max-width: 768px) {
+            & > div {
+                @apply hidden h-0 w-0 overflow-hidden;
+                &.not-implemented {
+                    @apply absolute flex flex-col h-screen w-full overflow-hidden items-center justify-center p-8;
+                    span {
+                        @apply text-primary text-lg text-center;
+                    } 
+                    img {
+                        max-width: 800px;
+                        object-fit: cover;
+                        @apply w-full mb-8;
+                    }
+                }
+            }
+        }
         transition: opacity 1s ease-in;
         grid-template-rows: auto 1fr;
         grid-template-columns: auto 1fr;
@@ -32,151 +51,4 @@ body {
         @apply h-screen w-full overflow-hidden grid;
     }
     @apply h-screen w-full text-white bg-secondary-thin overflow-x-hidden;
-}
-::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-    @apply bg-secondary-thin;
-}
-
-/* background of the scrollbar except button or resizer */
-::-webkit-scrollbar-track {
-    @apply bg-secondary-thin;
-    &:hover {
-        @apply bg-secondary-thin;
-    }
-}
-
-/* scrollbar itself */
-::-webkit-scrollbar-thumb {
-    border-radius: 12px;
-    border: 3px solid red;
-    @apply bg-secondary-thin;
-}
-::-webkit-scrollbar-thumb:hover {
-    @apply bg-secondary-thin;
-}
-
-/* set button(top and bottom of the scrollbar) */
-::-webkit-scrollbar-button {
-    display: none;
-}
-
-::selection {
-    transition: background-color 0.35s;
-}
-.ant-tag-blue {
-    @apply border-primary text-primary bg-primary-thin;
-}
-.ant-tabs-tab {
-    &.ant-tabs-tab-active {
-        @apply border-primary text-primary;
-        .ant-tabs-tab-btn {
-            @apply text-primary;
-        }
-    }
-    &:hover {
-        @apply border-primary text-primary;
-    }
-}
-.ant-tabs-ink-bar {
-    @apply bg-primary;
-}
-.ant-pagination-item {
-    &.ant-pagination-item-active {
-        @apply border-primary text-primary;
-        a {
-            @apply text-primary;
-        }
-    }
-    &:hover {
-        @apply border-primary text-primary;
-        a {
-            @apply text-primary;
-        }
-    }
-}
-
-$loader-neutral: 5px;
-$loader-positive: 10px;
-$loader-negative: -10px;
-$color: #34dba1;
-
-.loading-animation {
-    height: $loader-neutral;
-    width: $loader-neutral;
-    box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
-        $loader-negative $loader-negative 0 $loader-neutral $color, $loader-negative $loader-negative 0 $loader-neutral $color,
-        $loader-negative $loader-negative 0 $loader-neutral $color;
-    animation: loading-animation 6s infinite;
-}
-
-@keyframes loading-animation {
-    0% {
-        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
-            $loader-negative $loader-negative 0 $loader-neutral $color,
-            $loader-negative $loader-negative 0 $loader-neutral $color,
-            $loader-negative $loader-negative 0 $loader-neutral $color;
-    }
-    8.33% {
-        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
-           $loader-positive $loader-negative 0 $loader-neutral $color,$loader-positive $loader-negative 0 $loader-neutral $color,
-           $loader-positive $loader-negative 0 $loader-neutral $color;
-    }
-    16.66% {
-        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
-           $loader-positive $loader-negative 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
-           $loader-positive$loader-positive 0 $loader-neutral $color;
-    }
-    24.99% {
-        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
-           $loader-positive $loader-negative 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
-            $loader-negative$loader-positive 0 $loader-neutral $color;
-    }
-    33.32% {
-        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
-           $loader-positive $loader-negative 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
-            $loader-negative $loader-negative 0 $loader-neutral $color;
-    }
-    41.65% {
-        box-shadow:$loader-positive $loader-negative 0 $loader-neutral $color,
-           $loader-positive $loader-negative 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
-           $loader-positive $loader-negative 0 $loader-neutral $color;
-    }
-    49.98% {
-        box-shadow:$loader-positive$loader-positive 0 $loader-neutral $color,
-           $loader-positive$loader-positive 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
-           $loader-positive$loader-positive 0 $loader-neutral $color;
-    }
-    58.31% {
-        box-shadow: $loader-negative$loader-positive 0 $loader-neutral $color,
-            $loader-negative$loader-positive 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
-            $loader-negative$loader-positive 0 $loader-neutral $color;
-    }
-    66.64% {
-        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
-            $loader-negative $loader-negative 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
-            $loader-negative$loader-positive 0 $loader-neutral $color;
-    }
-    74.97% {
-        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
-           $loader-positive $loader-negative 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
-            $loader-negative$loader-positive 0 $loader-neutral $color;
-    }
-    83.3% {
-        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
-           $loader-positive$loader-positive 0 $loader-neutral $color,$loader-positive$loader-positive 0 $loader-neutral $color,
-            $loader-negative$loader-positive 0 $loader-neutral $color;
-    }
-    91.63% {
-        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
-            $loader-negative$loader-positive 0 $loader-neutral $color, $loader-negative$loader-positive 0 $loader-neutral $color,
-            $loader-negative$loader-positive 0 $loader-neutral $color;
-    }
-    100% {
-        box-shadow: $loader-negative $loader-negative 0 $loader-neutral $color,
-            $loader-negative $loader-negative 0 $loader-neutral $color,
-            $loader-negative $loader-negative 0 $loader-neutral $color,
-            $loader-negative $loader-negative 0 $loader-neutral $color;
-    }
 }

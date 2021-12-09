@@ -4,6 +4,7 @@ import { SkillService } from '../../../services'
 import { ISkill } from '../../../types'
 import randomColor from 'randomcolor'
 import { subString } from '../../../utils'
+import { useChartUpdate } from '../../../hooks'
 
 interface Props {
     data?: any
@@ -37,16 +38,26 @@ function formatData(data: ISkill[]): IBarChartData {
     return records
 }
 
-const options = {
-    
+const options: any = {
+    responsive: true,
     maintainAspectRatio: false,
     plugins: {
         legend: {
-            display: false
+            position: 'right'
+        },
+        title: {
+            text: 'Number of students with specific skills',
+            // color: 'red',
+            display: true,
+            padding: 3,
+            font: {
+                weight: "normal"
+            }
         }
     }
 }
 export function SkillsBarChart() {
+    const chartRef = useChartUpdate()
     const [data, setData] = useState<IBarChartData>({
         labels: [],
         datasets: []
@@ -61,5 +72,11 @@ export function SkillsBarChart() {
         console.log(formatData(skills))
         setData(formatData(skills))
     }
-    return <Bar data={data} options={options}></Bar>
+    return (
+        <Bar
+            ref={(_ref) => (chartRef.current = _ref)}
+            data={data}
+            options={options}
+        ></Bar>
+    )
 }

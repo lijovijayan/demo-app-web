@@ -3,6 +3,7 @@ import { Doughnut } from 'react-chartjs-2'
 import randomColor from 'randomcolor'
 import { ICollegeObject } from '../../../types'
 import { subString } from '../../../utils'
+import { useChartUpdate } from '../../../hooks'
 
 interface Props {
     country: number
@@ -67,13 +68,14 @@ export function StatesDaughnutChart({
     colleges,
     state
 }: Props) {
+    const chartRef = useChartUpdate()
     const [data, setData] = useState<IDoughnutChartData>({
         labels: [],
         datasets: []
     })
 
     const options = {
-        
+        responsive: true,
         maintainAspectRatio: false,
         onClick: (e: any, item: any) => {
             const datasetIndex = item?.[0]?.datasetIndex
@@ -84,9 +86,18 @@ export function StatesDaughnutChart({
             }
         },
         plugins: {
-            legend: {
-                display: false
+            title: {
+                text: 'States',
+                // color: 'red',
+                display: true,
+                padding: 3,
+                font: {
+                    weight: "normal"
+                }
             }
+            // legend: {
+            //     display: false
+            // }
         }
     }
 
@@ -98,5 +109,11 @@ export function StatesDaughnutChart({
         }
     }, [colleges, country])
 
-    return <Doughnut data={data} options={options}></Doughnut>
+    return (
+        <Doughnut
+            ref={(_ref) => (chartRef.current = _ref)}
+            data={data}
+            options={options}
+        ></Doughnut>
+    )
 }

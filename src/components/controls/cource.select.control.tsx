@@ -15,9 +15,9 @@ export function CourceSelect({ onChange, value }: Props) {
     const [options, setOptions] = useState<IOption[]>([])
     const [loading, setLoader] = useState<boolean>(false)
     useEffect(() => {
-        fetchColleges()
+        fetchCources()
     }, [])
-    async function fetchColleges() {
+    async function fetchCources() {
         setLoader(true)
         const courceService = new CourceService()
         try {

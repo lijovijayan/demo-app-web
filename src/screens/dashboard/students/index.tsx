@@ -7,13 +7,15 @@ import {
     IPaginatedResponse,
     IPagination,
     IStudentObject,
-    IStudentFilterForm
+    IStudentFilterForm,
+    IStudent
 } from '../../../types'
 import Filters from './filters'
 import renderColumns from './table-columns'
 
 export function Students() {
     const [loading, setLoader] = useState(false)
+    const [filter, setFilter] = useState<Partial<IStudent>>({})
     const [students, setStudents] = useState<IStudentObject[]>([])
     const [pagination, setPagination] = useState<IPagination>({
         page: 1,
@@ -26,20 +28,30 @@ export function Students() {
         fetchStudents({ pagination })
     }, [])
 
-    function onFilterChange(filter: IStudentFilterForm) {
+    function onFilterChange(_filter: IStudentFilterForm) {
+        const formattedFilter = getFormattedFilter(_filter)
         const searchFilter: IFStudent = {
             pagination: {
                 ...pagination,
-                page: 1,
-                searchKey: filter[STUDENT_FILTER_FORM_CONTROL.SEARCH_KEY]
+                page: 1
             },
-            college_id: filter[STUDENT_FILTER_FORM_CONTROL.COLLEGE],
-            skills: filter[STUDENT_FILTER_FORM_CONTROL.SKILL]
-                ? [filter[STUDENT_FILTER_FORM_CONTROL.SKILL]]
-                : undefined,
-            year_of_batch: filter[STUDENT_FILTER_FORM_CONTROL.BATCH]
+            ...formattedFilter
         }
         fetchStudents(searchFilter)
+        setFilter(formattedFilter)
+    }
+
+    function getFormattedFilter(
+        _filter: IStudentFilterForm
+    ): Partial<IStudent> {
+        return {
+            name: _filter[STUDENT_FILTER_FORM_CONTROL.SEARCH_KEY],
+            year_of_batch: _filter[STUDENT_FILTER_FORM_CONTROL.BATCH],
+            college_id: _filter[STUDENT_FILTER_FORM_CONTROL.COLLEGE],
+            skills: _filter[STUDENT_FILTER_FORM_CONTROL.SKILL]
+                ? [_filter[STUDENT_FILTER_FORM_CONTROL.SKILL]]
+                : undefined
+        }
     }
 
     async function fetchStudents(filter: IFStudent) {
@@ -63,13 +75,12 @@ export function Students() {
         setLoader(false)
     }
     function onPageChange(pageNumber: number, pageSize: number) {
-        console.log({ pageNumber, pageSize })
         const _pagination = {
             ...pagination,
             page: pageNumber,
             pageSize: pageSize
         }
-        fetchStudents({ pagination: _pagination })
+        fetchStudents({ pagination: _pagination, ...filter })
     }
 
     return (

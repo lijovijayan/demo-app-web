@@ -1,6 +1,7 @@
 import { Select } from 'antd'
 import { useEffect, useState } from 'react'
 import { CityService } from '../../services'
+import { IFCity } from '../../types'
 
 interface IOption {
     value: number
@@ -9,19 +10,22 @@ interface IOption {
 interface Props {
     value?: string
     onChange?: (value: string) => void
+    filter?: IFCity
 }
 
-export function CitySelect({ onChange, value }: Props) {
+export function CitySelect({ onChange, value, filter = {} }: Props) {
     const [options, setOptions] = useState<IOption[]>([])
     const [loading, setLoader] = useState<boolean>(false)
+
     useEffect(() => {
-        fetchColleges()
-    }, [])
-    async function fetchColleges() {
+        fetchCities()
+    }, [filter.country_id, filter.state_id])
+
+    async function fetchCities() {
         setLoader(true)
         const cityService = new CityService()
         try {
-            const cities = await cityService.getCities()
+            const cities = await cityService.getCitiesWithFilter(filter)
             setOptions(
                 cities.map((_city) => {
                     return {

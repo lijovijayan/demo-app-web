@@ -16,6 +16,7 @@ import {
     RadialLinearScale,
     Filler
 } from 'chart.js'
+import { useEffect } from 'react'
 
 ChartJS.register(
     CategoryScale,
@@ -24,9 +25,9 @@ ChartJS.register(
     LineElement,
     ArcElement,
     BarElement,
-    Title,
     Tooltip,
     Legend,
+    Title,
     Filler,
     RadialLinearScale
 )
@@ -34,7 +35,6 @@ ChartJS.register(
 function App() {
     return (
         <div className="app-container">
-            {/* <SplashScreen /> */}
             <div className="navbar">
                 <NavBar />
             </div>
@@ -43,6 +43,16 @@ function App() {
                 <div className="screen-content">
                     <Dashboard />
                 </div>
+            </div>
+            <div className="not-implemented">
+                <img
+                    src="/assets/images/responsive.png"
+                    alt="under development"
+                />
+                <span>
+                    Responsive design is under development, try a higher
+                    dimensional resolution!
+                </span>
             </div>
         </div>
     )

@@ -43,7 +43,7 @@ function renderColumns() {
                 render={(cources) => (
                     <>
                         {cources.map((cource: any) => (
-                            <Tag color="blue" key={cource}>
+                            <Tag color="blue" key={cource.id}>
                                 {cource.name}
                             </Tag>
                         ))}

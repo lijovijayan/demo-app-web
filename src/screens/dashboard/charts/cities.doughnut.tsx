@@ -3,6 +3,7 @@ import { Doughnut } from 'react-chartjs-2'
 import randomColor from 'randomcolor'
 import { ICollegeObject } from '../../../types'
 import { subString } from '../../../utils'
+import { useChartUpdate } from '../../../hooks'
 
 interface Props {
     state: number
@@ -58,15 +59,25 @@ function formatData(data: ICollegeObject[], state: number): IDoughnutChartData {
 }
 
 const options = {
-    
     maintainAspectRatio: false,
+    responsive: true,
     plugins: {
-        legend: {
-            display: false
+        title: {
+            text: 'Cities',
+            // color: 'red',
+            display: true,
+            padding: 3,
+            font: {
+                weight: 'normal'
+            }
         }
+        // legend: {
+        //     display: false
+        // }
     }
 }
 export function CitiesDaughnutChart({ state, colleges }: Props) {
+    const chartRef = useChartUpdate()
     const [data, setData] = useState<IDoughnutChartData>({
         labels: [],
         datasets: []
@@ -74,5 +85,11 @@ export function CitiesDaughnutChart({ state, colleges }: Props) {
     useEffect(() => {
         setData(formatData(colleges, state))
     }, [colleges, state])
-    return <Doughnut data={data} options={options}></Doughnut>
+    return (
+        <Doughnut
+            ref={(_ref) => chartRef.current}
+            data={data}
+            options={options}
+        ></Doughnut>
+    )
 }

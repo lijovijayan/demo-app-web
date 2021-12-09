@@ -7,13 +7,15 @@ import {
     IPagination,
     ICollegeObject,
     IFCollege,
-    ICollegeFilterForm
+    ICollegeFilterForm,
+    ICollege
 } from '../../../types'
 import Filters from './filters'
 import renderColumns from './table-columns'
 
 export function Colleges() {
     const [loading, setLoader] = useState(false)
+    const [filter, setFilter] = useState<Partial<ICollege>>({})
     const [colleges, setColleges] = useState<ICollegeObject[]>([])
     const [pagination, setPagination] = useState<IPagination>({
         page: 1,
@@ -46,21 +48,31 @@ export function Colleges() {
         setLoader(false)
     }
 
-    function onFilterChange(filter: ICollegeFilterForm) {
+    function getFormattedFilter(
+        _filter: ICollegeFilterForm
+    ): Partial<ICollege> {
+        return {
+            name: _filter[COLLEGE_FILTER_FORM_CONTROL.SEARCH_KEY],
+            country: _filter[COLLEGE_FILTER_FORM_CONTROL.COUNTRY],
+            state: _filter[COLLEGE_FILTER_FORM_CONTROL.STATE],
+            city: _filter[COLLEGE_FILTER_FORM_CONTROL.CITY],
+            cources: _filter[COLLEGE_FILTER_FORM_CONTROL.COURCE]
+                ? ([_filter[COLLEGE_FILTER_FORM_CONTROL.COURCE]] as any)
+                : undefined
+        }
+    }
+
+    function onFilterChange(_filter: ICollegeFilterForm) {
+        const _formattedFilter = getFormattedFilter(_filter)
         const searchFilter: IFCollege = {
             pagination: {
                 ...pagination,
-                page: 1,
-                searchKey: filter[COLLEGE_FILTER_FORM_CONTROL.SEARCH_KEY]
+                page: 1
             },
-            country: filter[COLLEGE_FILTER_FORM_CONTROL.COUNTRY],
-            state: filter[COLLEGE_FILTER_FORM_CONTROL.STATE],
-            city: filter[COLLEGE_FILTER_FORM_CONTROL.CITY],
-            cources: filter[COLLEGE_FILTER_FORM_CONTROL.COURCE]
-                ? [filter[COLLEGE_FILTER_FORM_CONTROL.COURCE]]
-                : undefined
+            ..._formattedFilter
         }
         fetchColleges(searchFilter)
+        setFilter(_formattedFilter)
     }
 
     function onPageChange(pageNumber: number, pageSize: number) {
@@ -70,7 +82,10 @@ export function Colleges() {
             page: pageNumber,
             pageSize: pageSize
         }
-        fetchColleges({ pagination: _pagination })
+        fetchColleges({
+            pagination: _pagination,
+            ...filter
+        })
     }
     console.log(pagination)
 

@@ -4,6 +4,7 @@ import { CourceService } from '../../../services'
 import { ICource } from '../../../types'
 import randomColor from 'randomcolor'
 import { subString } from '../../../utils'
+import { useChartUpdate } from '../../../hooks'
 
 interface Props {
     data?: any
@@ -46,6 +47,7 @@ function formatData(data: ICource[]): IDoughnutChartData {
 }
 
 export function CourcesChart() {
+    const chartRef = useChartUpdate()
     const [data, setData] = useState<IDoughnutChartData>({
         labels: [],
         datasets: []
@@ -56,7 +58,7 @@ export function CourcesChart() {
     }, [])
 
     const options = {
-        
+        responsive: true,
         maintainAspectRatio: false,
         plugins: {
             legend: {
@@ -71,5 +73,11 @@ export function CourcesChart() {
         console.log(formatData(_cources))
         setData(formatData(_cources))
     }
-    return <Doughnut data={data} options={options}></Doughnut>
+    return (
+        <Doughnut
+            ref={(_ref) => (chartRef.current = _ref)}
+            data={data}
+            options={options}
+        ></Doughnut>
+    )
 }

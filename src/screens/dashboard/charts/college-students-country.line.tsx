@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2'
+import { useChartUpdate } from '../../../hooks'
 import { SkillService } from '../../../services'
 import { ICollegeObject, ISkill } from '../../../types'
 import { getColorWithOpacity } from '../../../utils'
@@ -55,6 +56,7 @@ export function NumberOfStudentsAndCollegesLineChart({
     colleges,
     setLoader
 }: Props) {
+    const chartRef = useChartUpdate()
     const [skills, setSkills] = useState<ISkill[]>([])
     const [data, setData] = useState<ILineChartData>({
         labels: [],
@@ -79,8 +81,21 @@ export function NumberOfStudentsAndCollegesLineChart({
     }
     return (
         <Line
+            ref={(_ref) => chartRef.current}
             options={{
+                responsive: true,
                 maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        text: 'Number of students with specific skills in each colleges',
+                        // color: 'red',
+                        display: true,
+                        padding: 3,
+                        font: {
+                            weight: "normal"
+                        }
+                    }
+                },
                 scales: {
                     x: {
                         ticks: {

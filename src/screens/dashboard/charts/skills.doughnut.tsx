@@ -4,6 +4,7 @@ import { SkillService } from '../../../services'
 import { ISkill } from '../../../types'
 import randomColor from 'randomcolor'
 import { subString } from '../../../utils'
+import { useChartUpdate } from '../../../hooks'
 
 interface Props {
     data?: any
@@ -46,15 +47,25 @@ function formatData(data: ISkill[]): IDoughnutChartData {
 }
 
 const options = {
-    
+    responsive: true,
     maintainAspectRatio: false,
     plugins: {
         legend: {
             display: false
+        },
+        title: {
+            text: 'Skills',
+            // color: 'red',
+            display: true,
+            padding: 3,
+            font: {
+                weight: "normal"
+            }
         }
     }
 }
 export function SkillsDoughnutChart() {
+    const chartRef = useChartUpdate()
     const [data, setData] = useState<IDoughnutChartData>({
         labels: [],
         datasets: []
@@ -69,5 +80,11 @@ export function SkillsDoughnutChart() {
         console.log(formatData(skills))
         setData(formatData(skills))
     }
-    return <Doughnut data={data} options={options}></Doughnut>
+    return (
+        <Doughnut
+            ref={(_ref) => (chartRef.current = _ref)}
+            data={data}
+            options={options}
+        ></Doughnut>
+    )
 }

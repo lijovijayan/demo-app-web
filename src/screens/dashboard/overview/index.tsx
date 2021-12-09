@@ -41,13 +41,13 @@ export function Overview() {
     function renderCountries() {
         return (
             <div>
-                <CountriesDaughnutChart
-                    country={country}
-                    colleges={colleges}
-                    onCountryChange={(id) =>
-                        onLocationChange({ country: id, state: 0 })
-                    }
-                />
+                    <CountriesDaughnutChart
+                        country={country}
+                        colleges={colleges}
+                        onCountryChange={(id) =>
+                            onLocationChange({ country: id, state: 0 })
+                        }
+                    />
             </div>
         )
     }

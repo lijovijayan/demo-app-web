@@ -32,7 +32,7 @@ function renderColumns() {
                 render={(skills) => (
                     <>
                         {skills.map((skill: any) => (
-                            <Tag color="blue" key={skill}>
+                            <Tag color="blue" key={skill.id}>
                                 {skill.name}
                             </Tag>
                         ))}
