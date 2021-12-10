@@ -58,7 +58,7 @@ function Filters({ onChange }: Props) {
         >
             <Item name={[COLLEGE_FILTER_FORM_CONTROL.SEARCH_KEY]}>
                 <Search
-                    placeholder="student name"
+                    placeholder="college name"
                     allowClear
                 />
             </Item>

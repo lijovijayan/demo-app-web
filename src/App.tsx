@@ -51,8 +51,7 @@ function App() {
                     alt="under development"
                 />
                 <span>
-                    Responsive design is under development, try a higher
-                    dimensional resolution!
+                    Responsive UI is under development, please try on a higher resolution!
                 </span>
             </div>
         </div>

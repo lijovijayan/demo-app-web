@@ -35,7 +35,7 @@ function Filters({ onChange }: Props) {
             onValuesChange={onValuesChange}
         >
             <Item name={[STUDENT_FILTER_FORM_CONTROL.SEARCH_KEY]}>
-                <Search placeholder="college name" allowClear />
+                <Search placeholder="student name" allowClear />
             </Item>
             <Item name={[STUDENT_FILTER_FORM_CONTROL.BATCH]}>
                 <BatchSelect />
