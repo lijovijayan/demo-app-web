@@ -15,7 +15,7 @@ export function getColorWithOpacity() {
 export function disableAutoComplete() {
     setTimeout(() => {
         document.querySelectorAll('input').forEach((e) => {
-            e.setAttribute('autocomplete', 'oneshot-prevent-autocomplete')
+            e.setAttribute('autocomplete', 'demo-app-prevent-autocomplete')
         })
     }, 1000)
 }

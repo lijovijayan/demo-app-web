@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Input, Form } from 'antd'
 import {
     BatchSelect,
     CollegeSelect,
     CourceSelect,
+    SearchBox,
     SkillSelect
 } from '../../../components'
 import {} from 'antd/lib/form/Form'
@@ -27,7 +28,7 @@ function Filters({ onChange }: Props) {
     ) {
         onChange(values)
     }
-    
+
     return (
         <Form
             form={form}
@@ -35,7 +36,7 @@ function Filters({ onChange }: Props) {
             onValuesChange={onValuesChange}
         >
             <Item name={[STUDENT_FILTER_FORM_CONTROL.SEARCH_KEY]}>
-                <Search placeholder="student name" allowClear />
+                <SearchBox placeholder="student name" allowClear />
             </Item>
             <Item name={[STUDENT_FILTER_FORM_CONTROL.BATCH]}>
                 <BatchSelect />
@@ -54,3 +55,4 @@ function Filters({ onChange }: Props) {
 }
 
 export default Filters
+

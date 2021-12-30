@@ -1,7 +1,7 @@
 {
-    "name": "oneshot-web",
+    "name": "demo-app",
     "version": "0.1.0",
-    "homepage": "https://oneshot.lijovijayan.dev",
+    "homepage": "https://demo.lijovijayan.dev",
     "private": true,
     "dependencies": {
         "antd": "^4.17.2",

@@ -4,7 +4,8 @@ import {
     CountrySelect,
     StateSelect,
     CitySelect,
-    CourceSelect
+    CourceSelect,
+    SearchBox
 } from '../../../components'
 import {} from 'antd/lib/form/Form'
 import { ICollegeFilterForm } from '../../../types'
@@ -57,10 +58,7 @@ function Filters({ onChange }: Props) {
             autoCorrect="off"
         >
             <Item name={[COLLEGE_FILTER_FORM_CONTROL.SEARCH_KEY]}>
-                <Search
-                    placeholder="college name"
-                    allowClear
-                />
+                <SearchBox placeholder="college name" allowClear />
             </Item>
             <Item name={[COLLEGE_FILTER_FORM_CONTROL.COUNTRY]}>
                 <CountrySelect />
