@@ -20,13 +20,16 @@ export function SearchBox({
     }, [value])
 
     useEffect(() => {
+        console.log(searchKey);
+        
         const timeout = setTimeout(() => {
             onChange && onChange(searchKey)
-        }, 400)
+        }, 600)
         return () => {
             clearTimeout(timeout)
         }
-    }, [onChange, searchKey])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchKey])
 
     return (
         <Input.Search
